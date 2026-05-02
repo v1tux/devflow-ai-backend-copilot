@@ -1,5 +1,4 @@
 from app.auth.dependencies import get_current_user
-from fastapi import Depends
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from fastapi.responses import Response
 from sqlalchemy.orm import Session
