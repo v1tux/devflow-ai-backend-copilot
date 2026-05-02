@@ -1,0 +1,24 @@
+import axios from 'axios';
+
+export const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api',
+});
+
+export async function analyzeRepository(repositoryUrl) {
+  const { data } = await api.post('/analyses/repository', { repository_url: repositoryUrl });
+  return data;
+}
+
+export async function uploadZip(file) {
+  const formData = new FormData();
+  formData.append('file', file);
+  const { data } = await api.post('/analyses/upload', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return data;
+}
+
+export async function listAnalyses() {
+  const { data } = await api.get('/analyses');
+  return data;
+}
