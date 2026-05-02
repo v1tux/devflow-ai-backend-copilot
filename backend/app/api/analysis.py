@@ -1,3 +1,5 @@
+from app.auth.dependencies import get_current_user
+from fastapi import Depends
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from fastapi.responses import Response
 from sqlalchemy.orm import Session
@@ -83,7 +85,10 @@ def analyze_upload(file: UploadFile = File(...), db: Session = Depends(get_db)):
 
 
 @router.get("", response_model=list[AnalysisResponse])
-def list_analyses(db: Session = Depends(get_db)):
+def list_analyses(
+    db: Session = Depends(get_db),
+    user: str = Depends(get_current_user)
+):
     return db.query(Analysis).order_by(Analysis.created_at.desc()).limit(30).all()
 
 

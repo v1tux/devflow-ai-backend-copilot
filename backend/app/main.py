@@ -3,9 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.analysis import router as analysis_router
 from app.core.config import get_settings
 from app.core.database import Base, engine
+from app.auth.router import router as auth_router
 
 settings = get_settings()
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -13,18 +13,15 @@ app = FastAPI(
     version="1.0.0",
 )
 
+app.include_router(auth_router)
+app.include_router(analysis_router)
+
+Base.metadata.create_all(bind=engine)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_list,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.get("/health", tags=["Health"])
-def health_check():
-    return {"status": "ok", "app": settings.APP_NAME}
-
-
-app.include_router(analysis_router, prefix="/api")

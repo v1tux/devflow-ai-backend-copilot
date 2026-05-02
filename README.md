@@ -12,6 +12,11 @@ DevFlow AI é uma plataforma inteligente para análise de repositórios GitHub.
 - Score técnico do projeto
 - Geração de relatório em PDF
 
+<<<<<<< HEAD
+=======
+## 🔐 Autenticação JWT (em desenvolvimento)
+
+>>>>>>> feat/auth-jwt
 ## Stack
 - FastAPI
 - PostgreSQL
