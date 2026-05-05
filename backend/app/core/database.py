@@ -1,16 +1,33 @@
+import time
+
 from sqlalchemy import create_engine
-from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
+
 from app.core.config import get_settings
 
 settings = get_settings()
 
-connect_args = {"check_same_thread": False} if settings.DATABASE_URL.startswith("sqlite") else {}
-engine = create_engine(settings.DATABASE_URL, pool_pre_ping=True, connect_args=connect_args)
-SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+DATABASE_URL = settings.DATABASE_URL
 
+Base = declarative_base()
 
-class Base(DeclarativeBase):
-    pass
+engine = None
+
+for i in range(10):
+    try:
+        engine = create_engine(DATABASE_URL)
+        connection = engine.connect()
+        connection.close()
+        print("✅ Banco conectado!")
+        break
+    except Exception:
+        print(f"⏳ Tentando conectar ao banco... ({i + 1}/10)")
+        time.sleep(3)
+
+if engine is None:
+    raise Exception("❌ Não conseguiu conectar ao banco")
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 def get_db():

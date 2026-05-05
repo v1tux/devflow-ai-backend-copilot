@@ -1,19 +1,36 @@
-from app.auth.utils import hash_password, verify_password, create_access_token
+from sqlalchemy.orm import Session
 
-fake_db = {}
+from app.auth.utils import create_access_token, hash_password, verify_password
+from app.models.user import User
 
-def register_user(email: str, password: str):
-    if email in fake_db:
+
+def register_user(db: Session, email: str, password: str):
+    existing_user = db.query(User).filter(User.email == email).first()
+
+    if existing_user:
         raise Exception("User already exists")
 
-    fake_db[email] = hash_password(password)
-    return {"message": "User created"}
+    user = User(
+        email=email,
+        hashed_password=hash_password(password),
+    )
 
-def login_user(email: str, password: str):
-    user = fake_db.get(email)
+    db.add(user)
+    db.commit()
+    db.refresh(user)
 
-    if not user or not verify_password(password, user):
+    return {"message": "User created", "user_id": user.id}
+
+
+def login_user(db: Session, email: str, password: str):
+    user = db.query(User).filter(User.email == email).first()
+
+    if not user or not verify_password(password, user.hashed_password):
         raise Exception("Invalid credentials")
 
-    token = create_access_token({"sub": email})
-    return {"access_token": token}
+    token = create_access_token({"sub": user.email, "user_id": user.id})
+
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+    }

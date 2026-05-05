@@ -4,6 +4,7 @@ from app.api.analysis import router as analysis_router
 from app.core.config import get_settings
 from app.core.database import Base, engine
 from app.auth.router import router as auth_router
+from app.models import user
 
 settings = get_settings()
 
