@@ -14,6 +14,13 @@ export default function App() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+const [isAuthenticated, setIsAuthenticated] = useState(
+  Boolean(localStorage.getItem("devflow_token"))
+);
+
+if (!isAuthenticated) {
+  return <AuthForm onLogin={() => setIsAuthenticated(true)} />;
+}
 
   async function refreshHistory() {
     try {
@@ -111,3 +118,11 @@ export default function App() {
     </main>
   );
 }
+<button
+  onClick={() => {
+    localStorage.removeItem("devflow_token");
+    setIsAuthenticated(false);
+  }}
+>
+  Sair
+</button>
