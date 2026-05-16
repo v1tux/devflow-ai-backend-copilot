@@ -21,7 +21,7 @@ export function ScoreCard({ analysis }) {
       </div>
       <div className="score">{analysis.score}</div>
       <p>{analysis.summary}</p>
-      <a href={`http://localhost:8000/api/analyses/${analysis.id}/report`} target="_blank" rel="noreferrer">
+      <a href={`http://localhost:8000/analyses/${analysis.id}/report`} target="_blank" rel="noreferrer">
         Baixar relatório em PDF
       </a>
     </div>
