@@ -1,34 +1,34 @@
- 🚀 DevFlow AI
+# 🚀 DevFlow AI
 
 <img width="1269" height="617" alt="DevFlow" src="https://github.com/user-attachments/assets/64de87eb-6f7e-4c75-9fc4-99ec1b8d7bce" />
 
-DevFlow AI is an intelligent platform for analyzing software repositories, identifying code smells, security risks, architectural issues, maintainability problems and generating a technical quality score with actionable recommendations.
+O **DevFlow AI** é uma plataforma inteligente para análise de repositórios de software, identificação de *code smells*, riscos de segurança, problemas arquiteturais, pontos de melhoria e geração de um score técnico do projeto.
 
-The project was built as a backend-focused portfolio application, simulating real-world engineering practices such as authentication, protected API routes, Dockerized services, database persistence and automated validation.
-
----
-
-## ✨ Features
-
-- 🔐 JWT authentication with OAuth2 Password Bearer flow
-- 🛡️ Protected analysis routes
-- 🐘 PostgreSQL persistence
-- 🐳 Dockerized development environment
-- ⚡ FastAPI backend
-- 📊 Code quality analysis
-- 🔍 GitHub repository analysis
-- 📦 ZIP project upload analysis
-- 📄 PDF report generation
-- ❤️ Healthcheck endpoint
-- 📈 Metrics endpoint
-- ⚙️ Environment-based configuration
-- 🧪 CI pipeline with lint and build validation
+O objetivo do projeto é simular uma aplicação real de Back-End, aplicando boas práticas como autenticação JWT, rotas protegidas, persistência com PostgreSQL, ambiente Dockerizado, organização em camadas e validação automatizada com CI/CD.
 
 ---
 
-## 🧠 Tech Stack
+## ✨ Funcionalidades
 
-### Backend
+- 🔐 Autenticação com JWT e OAuth2
+- 🛡️ Rotas de análise protegidas
+- 🐘 Persistência com PostgreSQL
+- 🐳 Ambiente Dockerizado com Docker Compose
+- ⚡ API Back-End com FastAPI
+- 📊 Análise de qualidade de código
+- 🔍 Análise de repositórios GitHub
+- 📦 Upload e análise de projetos em `.zip`
+- 📄 Geração de relatório em PDF
+- ❤️ Endpoint de healthcheck
+- 📈 Endpoint de métricas
+- ⚙️ Configuração por variáveis de ambiente
+- 🧪 Pipeline CI com validação de lint e build
+
+---
+
+## 🧠 Stack Técnica
+
+### Back-End
 
 - Python
 - FastAPI
@@ -39,13 +39,13 @@ The project was built as a backend-focused portfolio application, simulating rea
 - Pydantic Settings
 - Docker
 
-### Frontend
+### Front-End
 
 - React
 - Vite
 - TypeScript
 
-### DevOps
+### DevOps / Qualidade
 
 - Docker Compose
 - GitHub Actions
@@ -53,7 +53,7 @@ The project was built as a backend-focused portfolio application, simulating rea
 
 ---
 
-## 📂 Project Architecture
+## 📂 Arquitetura do Projeto
 
 ```txt
 devflow-ai/
@@ -72,66 +72,122 @@ devflow-ai/
 │
 ├── docker-compose.yml
 └── README.md
-🔐 Authentication
+```
 
 The API uses JWT-based authentication.
 
-Authentication flow:
+## 🔐 Autenticação
 
-The user creates an account using POST /auth/register.
-The user logs in using POST /auth/login or the Swagger Authorize button.
-The API generates a JWT access token.
-Protected routes require the token in the request header.
-Requests without a valid token return 401 Unauthorized.
+A API utiliza autenticação baseada em **JWT**.
 
-Protected routes:
+Fluxo básico:
 
+1. O usuário cria uma conta em `POST /auth/register`.
+2. O usuário realiza login em `POST /auth/login` ou pelo botão `Authorize` do Swagger.
+3. A API gera um token JWT.
+4. As rotas protegidas exigem o token no cabeçalho da requisição.
+5. Requisições sem token válido retornam `401 Unauthorized`.
+
+Rotas protegidas:
+
+```txt
 POST /analyses/repository
 POST /analyses/upload
 GET  /analyses
 GET  /analyses/{analysis_id}
 GET  /analyses/{analysis_id}/report
+```
 
-Authorization header format:
+Formato do cabeçalho de autorização:
 
+```txt
 Authorization: Bearer <access_token>
+```
 
-📊 API Endpoints
-Auth
+---
+
+## 📊 Endpoints da API
+
+### Autenticação
+
+```txt
 POST /auth/register
 POST /auth/login
 POST /auth/token
-Analyses
+```
+
+### Análises
+
+```txt
 POST /analyses/repository
 POST /analyses/upload
 GET  /analyses
 GET  /analyses/{analysis_id}
 GET  /analyses/{analysis_id}/report
-System
+```
+
+### Sistema
+
+```txt
 GET /health
 GET /metrics
+```
 
-🐳 Running Locally
-Requirements
-Docker
-Docker Compose
-Start the project
+---
+
+## 🐳 Como Executar Localmente
+
+### Requisitos
+
+- Docker
+- Docker Compose
+
+### Subir o projeto
+
+```bash
 docker compose up --build
-Access the application
+```
 
-Frontend:
+### Acessos
 
+Front-End:
+
+```txt
 http://127.0.0.1:5173
+```
 
 Swagger documentation:
 
+```txt
 http://127.0.0.1:8000/docs
+```
+
+API Back-End:
+
+```txt
+http://127.0.0.1:8000
+```
 
 Backend API:
 
-http://127.0.0.1:8000
+## ⚙️ Variáveis de Ambiente
 
-⚙️ Environment Variables
+O Back-End utiliza variáveis de ambiente para configuração.
+
+Crie um arquivo `.env` dentro da pasta `backend/` com base no arquivo `.env.example`.
+
+Exemplo:
+
+```env
+APP_NAME=DevFlow AI
+APP_ENV=development
+SECRET_KEY=your-local-secret-key
+DATABASE_URL=postgresql+psycopg://postgres:postgres@db:5432/devflow
+OPENAI_API_KEY=
+CORS_ORIGINS=http://localhost:5173
+```
+
+O arquivo `.env` não deve ser enviado para o GitHub.
 
 The backend uses environment variables for configuration.
 
@@ -148,13 +204,19 @@ CORS_ORIGINS=http://localhost:5173
 
 The .env file should not be committed to GitHub.
 
-🧪 CI/CD
+## 🧪 CI/CD
 
-The project includes a GitHub Actions pipeline with:
+O projeto possui pipeline com GitHub Actions contendo:
 
-Backend lint validation with Ruff
-Frontend build validation
-Basic project validation for continuous integration
+- Validação de lint do Back-End com Ruff
+- Validação de build do Front-End
+- Verificação básica da integridade do projeto
+
+Melhorias planejadas para o CI/CD:
+
+- Executar testes automatizados com Pytest
+- Adicionar relatório de cobertura de testes
+- Adicionar validações de segurança no pipeline
 
 Planned CI improvements:
 
@@ -212,16 +274,76 @@ Engineering maturity
 
 The goal is to help developers, teams and technical reviewers quickly understand the health of a project and identify the highest-impact improvements.
 
-👨‍💻 Author
+## 📈 Roadmap
 
-Victor Anderson Lobo Prates
+### Concluído
 
-GitHub:
+- [x] API com FastAPI
+- [x] Persistência com PostgreSQL
+- [x] Ambiente com Docker Compose
+- [x] Configuração por variáveis de ambiente
+- [x] Autenticação com JWT
+- [x] Fluxo OAuth2 integrado ao Swagger
+- [x] Rotas de análise protegidas
+- [x] Análise de repositórios GitHub
+- [x] Upload e análise de projetos `.zip`
+- [x] Geração de relatório em PDF
+- [x] Endpoint de healthcheck
+- [x] Endpoint de métricas
+- [x] Pipeline com GitHub Actions
+
+### Próximos Passos
+
+- [ ] Vincular cada análise ao usuário autenticado
+- [ ] Filtrar histórico de análises pelo usuário logado
+- [ ] Impedir acesso a relatórios de outros usuários
+- [ ] Adicionar migrations com Alembic
+- [ ] Executar testes automatizados no CI
+- [ ] Melhorar o fluxo de autenticação no Front-End
+- [ ] Criar dashboard do usuário
+- [ ] Adicionar paginação na listagem de análises
+- [ ] Implementar fila em background para análises longas
+- [ ] Preparar deploy em ambiente de produção
+
+### Melhorias Futuras
+
+- [ ] Análise avançada com IA
+- [ ] Comparação entre diferentes análises do mesmo repositório
+- [ ] Score separado por segurança
+- [ ] Score separado por arquitetura
+- [ ] Histórico de evolução da qualidade do projeto
+- [ ] Suporte a times ou workspaces
+- [ ] Observabilidade com logs e métricas em produção
+
+---
+
+## 🧭 Visão do Produto
+
+O **DevFlow AI** tem como objetivo se tornar uma plataforma de inteligência para desenvolvedores, capaz de avaliar projetos de software por diferentes perspectivas técnicas:
+
+- Arquitetura
+- Segurança
+- Manutenibilidade
+- Qualidade de código
+- Experiência de desenvolvimento
+- Maturidade de engenharia
+
+A proposta é ajudar desenvolvedores, times e avaliadores técnicos a entender rapidamente a saúde de um projeto e identificar melhorias de maior impacto.
+
+---
+
+## 👨‍💻 Autor
+
+**Victor Anderson Lobo Prates**
+
+GitHub:  
 https://github.com/v1tux
 
-LinkedIn:
+LinkedIn:  
 https://linkedin.com/in/victor-lobo-prates-196970233
 
 ⭐ About this project
 
-This project is part of a backend engineering portfolio focused on demonstrating practical skills with API development, authentication, database persistence, Docker, CI/CD and software quality analysis.
+## ⭐ Sobre este projeto
+
+Este projeto faz parte de um portfólio focado em Back-End, com o objetivo de demonstrar habilidades práticas em desenvolvimento de APIs, autenticação, banco de dados, Docker, CI/CD e análise de qualidade de software.
