@@ -1,3 +1,36 @@
+<<<<<<< HEAD
+ 🚀 DevFlow AI
+
+<img width="1269" height="617" alt="DevFlow" src="https://github.com/user-attachments/assets/64de87eb-6f7e-4c75-9fc4-99ec1b8d7bce" />
+
+DevFlow AI is an intelligent platform for analyzing software repositories, identifying code smells, security risks, architectural issues, maintainability problems and generating a technical quality score with actionable recommendations.
+
+The project was built as a backend-focused portfolio application, simulating real-world engineering practices such as authentication, protected API routes, Dockerized services, database persistence and automated validation.
+
+---
+
+## ✨ Features
+
+- 🔐 JWT authentication with OAuth2 Password Bearer flow
+- 🛡️ Protected analysis routes
+- 🐘 PostgreSQL persistence
+- 🐳 Dockerized development environment
+- ⚡ FastAPI backend
+- 📊 Code quality analysis
+- 🔍 GitHub repository analysis
+- 📦 ZIP project upload analysis
+- 📄 PDF report generation
+- ❤️ Healthcheck endpoint
+- 📈 Metrics endpoint
+- ⚙️ Environment-based configuration
+- 🧪 CI pipeline with lint and build validation
+
+---
+
+## 🧠 Tech Stack
+
+### Backend
+=======
 # 🚀 DevFlow AI
 
 <img width="1269" height="617" alt="DevFlow" src="https://github.com/user-attachments/assets/64de87eb-6f7e-4c75-9fc4-99ec1b8d7bce" />
@@ -29,6 +62,7 @@ O objetivo do projeto é simular uma aplicação real de Back-End, aplicando boa
 ## 🧠 Stack Técnica
 
 ### Back-End
+>>>>>>> 5ac8255 (docs: update README in Portugese)
 
 - Python
 - FastAPI
@@ -39,13 +73,21 @@ O objetivo do projeto é simular uma aplicação real de Back-End, aplicando boa
 - Pydantic Settings
 - Docker
 
+<<<<<<< HEAD
+### Frontend
+=======
 ### Front-End
+>>>>>>> 5ac8255 (docs: update README in Portugese)
 
 - React
 - Vite
 - TypeScript
 
+<<<<<<< HEAD
+### DevOps
+=======
 ### DevOps / Qualidade
+>>>>>>> 5ac8255 (docs: update README in Portugese)
 
 - Docker Compose
 - GitHub Actions
@@ -53,7 +95,11 @@ O objetivo do projeto é simular uma aplicação real de Back-End, aplicando boa
 
 ---
 
+<<<<<<< HEAD
+## 📂 Project Architecture
+=======
 ## 📂 Arquitetura do Projeto
+>>>>>>> 5ac8255 (docs: update README in Portugese)
 
 ```txt
 devflow-ai/
@@ -72,10 +118,25 @@ devflow-ai/
 │
 ├── docker-compose.yml
 └── README.md
+<<<<<<< HEAD
+🔐 Authentication
+=======
 ```
+>>>>>>> 5ac8255 (docs: update README in Portugese)
 
 The API uses JWT-based authentication.
 
+<<<<<<< HEAD
+Authentication flow:
+
+The user creates an account using POST /auth/register.
+The user logs in using POST /auth/login or the Swagger Authorize button.
+The API generates a JWT access token.
+Protected routes require the token in the request header.
+Requests without a valid token return 401 Unauthorized.
+
+Protected routes:
+=======
 ## 🔐 Autenticação
 
 A API utiliza autenticação baseada em **JWT**.
@@ -89,6 +150,7 @@ Fluxo básico:
 5. Requisições sem token válido retornam `401 Unauthorized`.
 
 Rotas protegidas:
+>>>>>>> 5ac8255 (docs: update README in Portugese)
 
 ```txt
 POST /analyses/repository
@@ -96,6 +158,35 @@ POST /analyses/upload
 GET  /analyses
 GET  /analyses/{analysis_id}
 GET  /analyses/{analysis_id}/report
+<<<<<<< HEAD
+
+Authorization header format:
+
+Authorization: Bearer <access_token>
+
+📊 API Endpoints
+Auth
+POST /auth/register
+POST /auth/login
+POST /auth/token
+Analyses
+POST /analyses/repository
+POST /analyses/upload
+GET  /analyses
+GET  /analyses/{analysis_id}
+GET  /analyses/{analysis_id}/report
+System
+GET /health
+GET /metrics
+
+🐳 Running Locally
+Requirements
+Docker
+Docker Compose
+Start the project
+docker compose up --build
+Access the application
+=======
 ```
 
 Formato do cabeçalho de autorização:
@@ -147,6 +238,7 @@ GET /metrics
 ```bash
 docker compose up --build
 ```
+>>>>>>> 5ac8255 (docs: update README in Portugese)
 
 ### Acessos
 
@@ -170,6 +262,11 @@ http://127.0.0.1:8000
 
 Backend API:
 
+<<<<<<< HEAD
+http://127.0.0.1:8000
+
+⚙️ Environment Variables
+=======
 ## ⚙️ Variáveis de Ambiente
 
 O Back-End utiliza variáveis de ambiente para configuração.
@@ -188,6 +285,7 @@ CORS_ORIGINS=http://localhost:5173
 ```
 
 O arquivo `.env` não deve ser enviado para o GitHub.
+>>>>>>> 5ac8255 (docs: update README in Portugese)
 
 The backend uses environment variables for configuration.
 
@@ -206,6 +304,13 @@ The .env file should not be committed to GitHub.
 
 ## 🧪 CI/CD
 
+<<<<<<< HEAD
+The project includes a GitHub Actions pipeline with:
+
+Backend lint validation with Ruff
+Frontend build validation
+Basic project validation for continuous integration
+=======
 O projeto possui pipeline com GitHub Actions contendo:
 
 - Validação de lint do Back-End com Ruff
@@ -217,6 +322,7 @@ Melhorias planejadas para o CI/CD:
 - Executar testes automatizados com Pytest
 - Adicionar relatório de cobertura de testes
 - Adicionar validações de segurança no pipeline
+>>>>>>> 5ac8255 (docs: update README in Portugese)
 
 Planned CI improvements:
 
@@ -278,6 +384,12 @@ The goal is to help developers, teams and technical reviewers quickly understand
 
 ### Concluído
 
+<<<<<<< HEAD
+GitHub:
+https://github.com/v1tux
+
+LinkedIn:
+=======
 - [x] API com FastAPI
 - [x] Persistência com PostgreSQL
 - [x] Ambiente com Docker Compose
@@ -340,10 +452,15 @@ GitHub:
 https://github.com/v1tux
 
 LinkedIn:  
+>>>>>>> 5ac8255 (docs: update README in Portugese)
 https://linkedin.com/in/victor-lobo-prates-196970233
 
 ⭐ About this project
 
+<<<<<<< HEAD
+This project is part of a backend engineering portfolio focused on demonstrating practical skills with API development, authentication, database persistence, Docker, CI/CD and software quality analysis.
+=======
 ## ⭐ Sobre este projeto
 
 Este projeto faz parte de um portfólio focado em Back-End, com o objetivo de demonstrar habilidades práticas em desenvolvimento de APIs, autenticação, banco de dados, Docker, CI/CD e análise de qualidade de software.
+>>>>>>> 5ac8255 (docs: update README in Portugese)
