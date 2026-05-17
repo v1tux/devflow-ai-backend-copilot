@@ -7,6 +7,7 @@ import tempfile
 import zipfile
 
 from app.core.database import get_db
+from app.auth.dependencies import get_current_user
 from app.models.analysis import Analysis
 from app.schemas.analysis import AnalysisResponse, RepositoryAnalyzeRequest
 from app.services.repository_service import RepositoryService
@@ -14,7 +15,11 @@ from app.services.analyzer_service import AnalyzerService
 from app.services.ai_service import AIService
 from app.services.report_service import ReportService
 
-router = APIRouter(prefix="/analyses", tags=["Analyses"])
+router = APIRouter(
+    prefix="/analyses",
+    tags=["Analyses"],
+    dependencies=[Depends(get_current_user)],
+)
 
 repo_service = RepositoryService()
 analyzer_service = AnalyzerService()
